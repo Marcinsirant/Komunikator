@@ -18,6 +18,7 @@ public class Group {
 
     public String getGroupName() {
         int k;
+        int w;
         return groupName;
     }
 
