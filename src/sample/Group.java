@@ -1,8 +1,9 @@
 package sample;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Group {
+public class Group implements Serializable {
     String groupName;
     Map<String, Integer> nameClientMap;
 
@@ -19,9 +20,9 @@ public class Group {
     public void testowwa(){}
 
     public String getGroupName() {
-        int w;
         return groupName;
     }
+
 
     public void addClient(String nameClient, int socket){
         nameClientMap.put(nameClient, socket);

@@ -1,9 +1,11 @@
 package sample;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     int messageType;
     String messageContent;
-
+    String direction;
 
     public Message(int type, String content){
         messageType = type;
@@ -26,4 +28,11 @@ public class Message {
         this.messageType = messageType;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 }

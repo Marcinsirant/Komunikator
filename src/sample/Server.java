@@ -12,16 +12,18 @@ public class Server implements Serializable
 
     public class ClientService implements Runnable
     {
-        public Socket socket;
+
+        private Socket socket;
         public DataInputStream  input;
         public DataOutputStream out;
-        public ObjectOutputStream outObject;
+        public ObjectInputStream objectInputStream ;
 
-        public BufferedReader reader;
+        private String clientName;
 
-        ClientService(Socket clientSocket) throws IOException {
+        public ClientService(Socket clientSocket) throws IOException  {
             socket = clientSocket;
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
             System.out.println("(nowy watek utworzony)");
         }
         @Override
@@ -30,12 +32,25 @@ public class Server implements Serializable
             String messg = " ";
             while (true){
                 try {
-                    if (!messg.equals("Over")){
-                        messg = input.readUTF();
-                        System.out.println("odczyt: " + messg);
+                    System.out.println("(odczyt...)");
 
+                    Stream ourStream = (Stream) objectInputStream.readObject();
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+
+                    switch(ourStream.getType()) {
+                        case 1:
+                            clientName = (String) ourStream.getStremObject().toString();
+                            break;
+                        case 2:
+                            // code block
+                            break;
+                        //default:
+                            // code block
                     }
-                } catch (IOException e) {
+
+                    System.out.println("ClientName: " + clientName);
+
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                     System.out.println("watek sie zakonczyl)");
                     break;

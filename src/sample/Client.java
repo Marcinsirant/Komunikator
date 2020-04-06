@@ -1,6 +1,7 @@
 package sample;
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class Client
 {
@@ -9,6 +10,7 @@ public class Client
     private DataInputStream  input   = null;
     private DataOutputStream out     = null;
 
+    private ObjectOutputStream objectOutputStream = null;
     // constructor to put ip address and port 
     public Client(String address, int port)
     {
@@ -23,6 +25,8 @@ public class Client
 
             // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream());
+
+            objectOutputStream=new ObjectOutputStream(socket.getOutputStream());
         }
         catch(UnknownHostException u)
         {
@@ -41,9 +45,14 @@ public class Client
         {
             try
             {
+                Scanner scanner = new Scanner(System.in);
+                int num = scanner.nextInt();
                 line = input.readLine();
-                out.writeUTF(line);
-                //System.out.println(line);
+
+                Stream sendStream = new Stream(num,new String(line));
+
+                objectOutputStream.writeObject(sendStream);
+                System.out.println("wysylano: " + sendStream.getType() +":"+ sendStream.getStremObject().getClass());
             }
             catch(IOException i)
             {
@@ -54,6 +63,7 @@ public class Client
         // close the connection 
         try
         {
+            objectOutputStream.close();
             input.close();
             out.close();
             socket.close();
