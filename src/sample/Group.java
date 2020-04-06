@@ -16,8 +16,9 @@ public class Group {
         nameClientMap = map;
     }
 
+    public void testowwa(){}
+
     public String getGroupName() {
-        int k;
         int w;
         return groupName;
     }
