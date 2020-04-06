@@ -4,26 +4,32 @@ package sample;// A Java program for a Server
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server implements Serializable
 {
     private ServerSocket    server   = null;
-
+    List<Group> groupList = new ArrayList<Group>() ;
 
     public class ClientService implements Runnable
     {
 
         private Socket socket;
-        public DataInputStream  input;
-        public DataOutputStream out;
-        public ObjectInputStream objectInputStream ;
+
+        private ObjectOutputStream objectOutputStream = null;
+
+        public ObjectInputStream objectInputStream = null ;
 
         private String clientName;
 
         public ClientService(Socket clientSocket) throws IOException  {
             socket = clientSocket;
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+
             objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
+
             System.out.println("(nowy watek utworzony)");
         }
         @Override
@@ -42,7 +48,8 @@ public class Server implements Serializable
                             clientName = (String) ourStream.getStremObject().toString();
                             break;
                         case 2:
-                            // code block
+                            addOrJoinGroup((String) ourStream.getStremObject().toString(), clientName, socket);
+
                             break;
                         //default:
                             // code block
@@ -82,6 +89,25 @@ public class Server implements Serializable
             System.out.println(i);
         }
     }
+
+    public void addOrJoinGroup(String group, String nameUser, Socket socket) throws IOException {
+        Group index = null;
+        for (Group el : groupList) {
+            if(el.getGroupName().equals(group)){
+                index = el;
+                el.addClient(nameUser,socket);
+            };
+        }
+
+        if(index ==null){
+            Group gr = new Group(group);
+            gr.addClient(nameUser, socket);
+            groupList.add(gr);
+        }
+
+        groupList.forEach((o)->{ System.out.println("grupy: " + o.getGroupName() );});
+
+    };
 
     public static void main(String[] args) {
         Server server = new Server(5000);

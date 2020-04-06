@@ -8,9 +8,9 @@ public class Client
     // initialize socket and input output streams 
     private Socket socket            = null;
     private DataInputStream  input   = null;
-    private DataOutputStream out     = null;
 
     private ObjectOutputStream objectOutputStream = null;
+    public ObjectInputStream objectInputStream = null;
     // constructor to put ip address and port 
     public Client(String address, int port)
     {
@@ -20,11 +20,10 @@ public class Client
             socket = new Socket(address, port);
             System.out.println("Connected");
 
-            // takes input from terminal 
+            // takes input from terminal
             input  = new DataInputStream(System.in);
 
-            // sends output to the socket 
-            out    = new DataOutputStream(socket.getOutputStream());
+
 
             objectOutputStream=new ObjectOutputStream(socket.getOutputStream());
         }
@@ -53,6 +52,14 @@ public class Client
 
                 objectOutputStream.writeObject(sendStream);
                 System.out.println("wysylano: " + sendStream.getType() +":"+ sendStream.getStremObject().getClass());
+
+                if(num == 2){
+                    //objectInputStream = new ObjectInputStream(socket.getInputStream());
+                   //Stream ourStream = (Stream) objectInputStream.readObject();
+                    // System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+                }
+
+
             }
             catch(IOException i)
             {
@@ -65,7 +72,6 @@ public class Client
         {
             objectOutputStream.close();
             input.close();
-            out.close();
             socket.close();
         }
         catch(IOException i)

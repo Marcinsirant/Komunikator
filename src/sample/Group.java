@@ -1,20 +1,17 @@
 package sample;
 
 import java.io.Serializable;
+import java.net.Socket;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Group implements Serializable {
     String groupName;
-    Map<String, Integer> nameClientMap;
+    Map<String, Socket> nameClientMap = new HashMap<String, Socket>();
 
     public Group(String name){
         groupName=name;
-        nameClientMap=null;
-    }
 
-    public  Group(String name,  Map<String, Integer> map){
-        groupName=name;
-        nameClientMap = map;
     }
 
     public void testowwa(){}
@@ -24,7 +21,7 @@ public class Group implements Serializable {
     }
 
 
-    public void addClient(String nameClient, int socket){
+    public void addClient(String nameClient, Socket socket){
         nameClientMap.put(nameClient, socket);
     }
 
