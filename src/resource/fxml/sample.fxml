@@ -11,17 +11,17 @@
          <children>
             <ImageView layoutX="-16.0" layoutY="-10.0">
                <image>
-                  <Image url="@../resource/image/icons8-telegram-app-100.png" />
+                  <Image url="@../image/icons8-telegram-app-100.png" />
                </image>
             </ImageView>
             <ImageView fx:id="chatImage" layoutX="-16.0" layoutY="151.0" onMouseClicked="#chatImageClick" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
                <image>
-                  <Image url="@../resource/image/icons8-chat-100.png" />
+                  <Image url="@../image/icons8-chat-100.png" />
                </image>
             </ImageView>
             <ImageView fx:id="groupImage" layoutX="-16.0" layoutY="86.0" onMouseClicked="#groupImageClick" opacity="0.3" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
                <image>
-                  <Image url="@../resource/image/icons8-search-for-love-100.png" />
+                  <Image url="@../image/icons8-search-for-love-100.png" />
                </image>
             </ImageView>
          </children>
@@ -73,7 +73,7 @@
             </Pane>
             <ImageView fx:id="sendButtonImageView" layoutX="695.0" layoutY="380.0" onMouseClicked="#sendButtonImageViewClick" rotate="90.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
                <image>
-                  <Image url="@../resource/image/icons8-email-send-100.png" />
+                  <Image url="@../image/icons8-email-send-100.png" />
                </image>
             </ImageView>
             <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="576.0" promptText="fdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv4vvvvvvvvvvv" text="Hello. how are you?&#10;&#10;" />
@@ -84,7 +84,7 @@
          <children>
             <ImageView layoutX="376.0" layoutY="38.0">
                <image>
-                  <Image url="@../resource/image/icons8-telegram-app-100.png" />
+                  <Image url="@../image/icons8-telegram-app-100.png" />
                </image>
             </ImageView>
             <Label layoutX="272.0" layoutY="160.0" prefHeight="39.0" prefWidth="143.0" text="Your Name:">
