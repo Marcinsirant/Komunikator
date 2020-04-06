@@ -19,7 +19,6 @@ public class Group {
     public void testowwa(){}
 
     public String getGroupName() {
-        int k;
         int w;
         return groupName;
     }
