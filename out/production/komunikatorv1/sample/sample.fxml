@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="851.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Pane prefHeight="469.0" prefWidth="67.0" style="-fx-background-color: #3F4041;">
+         <children>
+            <ImageView layoutX="-16.0" layoutY="-10.0">
+               <image>
+                  <Image url="file:/F:/Meganz/JTP%20Jezyki%20i%20techniki%20programowania/Komunikator/icons8-telegram-app-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="chatImage" layoutX="-16.0" layoutY="151.0" onMouseClicked="#chatImageClick" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+               <image>
+                  <Image url="file:/F:/Meganz/JTP%20Jezyki%20i%20techniki%20programowania/Komunikator/icons8-chat-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="groupImage" layoutX="-16.0" layoutY="86.0" onMouseClicked="#groupImageClick" opacity="0.3" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+               <image>
+                  <Image url="file:/F:/Meganz/JTP%20Jezyki%20i%20techniki%20programowania/Komunikator/icons8-search-for-love-100.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="67.0" layoutY="43.0" prefHeight="469.0" prefWidth="784.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="groupAnchorPane" focusTraversable="true" layoutX="67.0" prefHeight="469.0" prefWidth="370.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
+               <children>
+                  <TableView fx:id="groupTableView" layoutX="10.0" layoutY="108.0" prefHeight="349.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
+                     <columns>
+                        <TableColumn prefWidth="147.0" style="-fx-background-color: #5959ff;" text="YourGroup" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="nickLabel" layoutX="23.0" layoutY="32.0" prefHeight="31.0" prefWidth="124.0" text="Your Nick" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="200.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Group:">
+               <font>
+                  <Font name="Times New Roman Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="groupTextField" layoutX="192.0" layoutY="60.0" prefHeight="25.0" prefWidth="158.0">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </TextField>
+            <Button fx:id="groupButton" layoutX="225.0" layoutY="103.0" mnemonicParsing="false" onAction="#groupButtonClick" prefHeight="25.0" prefWidth="92.0" text="Add Group">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="chatAnchorPage" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="784.0" visible="false">
+         <children>
+            <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
+               <children>
+                  <TableView fx:id="TableView" layoutX="10.0" layoutY="14.0" prefHeight="443.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
+                    <columns>
+                      <TableColumn prefWidth="147.0" style="-fx-background-color: #5959ff;" text="Name" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <ImageView fx:id="sendButtonImageView" layoutX="695.0" layoutY="380.0" onMouseClicked="#sendButtonImageViewClick" rotate="90.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+               <image>
+                  <Image url="file:/F:/Meganz/JTP%20Jezyki%20i%20techniki%20programowania/Komunikator/icons8-email-send-100.png" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="576.0" promptText="fdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv4vvvvvvvvvvv" text="Hello. how are you?&#10;&#10;" />
+            <TextArea fx:id="fieldToSendTextArea" layoutX="178.0" layoutY="405.0" prefHeight="50.0" prefWidth="530.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="851.0" style="-fx-background-color: #59595C;">
+         <children>
+            <ImageView layoutX="376.0" layoutY="38.0">
+               <image>
+                  <Image url="file:/F:/Meganz/JTP%20Jezyki%20i%20techniki%20programowania/Komunikator/icons8-telegram-app-100.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="272.0" layoutY="160.0" prefHeight="39.0" prefWidth="143.0" text="Your Name:">
+               <font>
+                  <Font name="Times New Roman Bold" size="26.0" />
+               </font>
+            </Label>
+            <TextField fx:id="loginTextField" layoutX="426.0" layoutY="166.0" opacity="0.5" prefHeight="25.0" prefWidth="158.0" promptText="Username">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </TextField>
+            <Button fx:id="loginButton" layoutX="351.0" layoutY="228.0" mnemonicParsing="false" onAction="#loginButtonClick" opacity="0.5" prefHeight="25.0" prefWidth="149.0" text="Go" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
