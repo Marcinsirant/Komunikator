@@ -1,17 +1,23 @@
 package sample;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Controller {
+
+    Client client = new Client("127.0.0.1", 5000);
 
     @FXML
     private ImageView chatImage;
@@ -23,7 +29,10 @@ public class Controller {
     private AnchorPane groupAnchorPane;
 
     @FXML
-    private TableView<?> groupTableView;
+    private TableView groupTableView;
+
+    @FXML
+    private TableColumn<String, String> groupColumnName;
 
     @FXML
     private Label nickLabel;
@@ -67,8 +76,14 @@ public class Controller {
     }
 
     @FXML
-    void groupButtonClick(ActionEvent event) {
+    void groupButtonClick(ActionEvent event) throws IOException {
+        client.userCreateOrAddGroup(groupTextField.getText());
 
+        groupColumnName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
+
+        groupTableView.getItems().add(groupTextField.getText());
+
+        groupTextField.setText("");
     }
 
     @FXML
@@ -86,6 +101,13 @@ public class Controller {
         groupImage.setOpacity(1);
         chatImage.setOpacity(0.5);
 
+        try {
+            client.userLogin(loginTextField.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        nickLabel.setText(loginTextField.getText());
     }
 
     @FXML

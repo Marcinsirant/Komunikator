@@ -105,7 +105,8 @@ public class Server implements Serializable
             groupList.add(gr);
         }
 
-        groupList.forEach((o)->{ System.out.println("grupy: " + o.getGroupName() );});
+        groupList.forEach((o)->{ System.out.println("grupy: " + o.getGroupName() +" uzytkownicy w grupie: " + o.getNameClientMap() );});
+
 
     };
 

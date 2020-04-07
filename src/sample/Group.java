@@ -25,5 +25,7 @@ public class Group implements Serializable {
         nameClientMap.put(nameClient, socket);
     }
 
-
+    public Map<String, Socket> getNameClientMap() {
+        return nameClientMap;
+    }
 }

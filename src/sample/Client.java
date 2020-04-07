@@ -40,48 +40,54 @@ public class Client
         String line = "";
 
         // keep reading until "Over" is input 
-        while (!line.equals("Over"))
-        {
-            try
-            {
-                Scanner scanner = new Scanner(System.in);
-                int num = scanner.nextInt();
-                line = input.readLine();
-
-                Stream sendStream = new Stream(num,new String(line));
-
-                objectOutputStream.writeObject(sendStream);
-                System.out.println("wysylano: " + sendStream.getType() +":"+ sendStream.getStremObject().getClass());
-
-                if(num == 2){
-                    //objectInputStream = new ObjectInputStream(socket.getInputStream());
-                   //Stream ourStream = (Stream) objectInputStream.readObject();
-                    // System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
-                }
-
-
-            }
-            catch(IOException i)
-            {
-                System.out.println(i);
-            }
-        }
+//        while (!line.equals("Over"))
+//        {
+//            try
+//            {
+//                Scanner scanner = new Scanner(System.in);
+//                int num = scanner.nextInt();
+//                line = input.readLine();
+//
+//                Stream sendStream = new Stream(num,new String(line));
+//
+//                objectOutputStream.writeObject(sendStream);
+//                System.out.println("wysylano: " + sendStream.getType() +":"+ sendStream.getStremObject().getClass());
+//
+//                if(num == 2){
+//                    //objectInputStream = new ObjectInputStream(socket.getInputStream());
+//                   //Stream ourStream = (Stream) objectInputStream.readObject();
+//                    // System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+//                }
+//
+//
+//            }
+//            catch(IOException i)
+//            {
+//                System.out.println(i);
+//            }
+//        }
 
         // close the connection 
-        try
-        {
-            objectOutputStream.close();
-            input.close();
-            socket.close();
-        }
-        catch(IOException i)
-        {
-            System.out.println(i);
-        }
+//        try
+//        {
+//            objectOutputStream.close();
+//            input.close();
+//            socket.close();
+//        }
+//        catch(IOException i)
+//        {
+//            System.out.println(i);
+//        }
     }
 
-    public static void main(String args[])
-    {
-        Client client = new Client("127.0.0.1", 5000);
+    public void userLogin(String name) throws IOException {
+        Stream sendStream = new Stream(1, new String(name));
+        objectOutputStream.writeObject(sendStream);
     }
+
+    public void userCreateOrAddGroup(String groupName) throws IOException {
+        Stream sendStream = new Stream(2, new String(groupName));
+        objectOutputStream.writeObject(sendStream);
+    }
+
 }
