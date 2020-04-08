@@ -67,12 +67,28 @@ public class Controller {
     @FXML
     private Button loginButton;
 
+
+    private void chooseGroup(){
+
+        groupTableView.setRowFactory( tv -> {
+            TableRow<String> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    String rowData = row.getItem();
+                    System.out.println("click group: "+rowData);
+                    changeAnchorPage();
+                }
+            });
+            return row;
+        });
+
+
+    }
+
     @FXML
     void chatImageClick(MouseEvent event) {
-        groupImage.setOpacity(0.5);
-        chatImage.setOpacity(1);
-        groupAnchorPane.setVisible(false);
-        chatAnchorPage.setVisible(true);
+        changeAnchorPage();
+
     }
 
     @FXML
@@ -84,14 +100,13 @@ public class Controller {
         groupTableView.getItems().add(groupTextField.getText());
 
         groupTextField.setText("");
+
+        this.chooseGroup();
     }
 
     @FXML
     void groupImageClick(MouseEvent event) {
-        groupImage.setOpacity(1);
-        chatImage.setOpacity(0.5);
-        groupAnchorPane.setVisible(true);
-        chatAnchorPage.setVisible(false);
+        changeAnchorPage();
     }
 
     @FXML
@@ -108,6 +123,7 @@ public class Controller {
         }
 
         nickLabel.setText(loginTextField.getText());
+
     }
 
     @FXML
@@ -115,4 +131,18 @@ public class Controller {
 
     }
 
+    void changeAnchorPage(){
+        if(groupAnchorPane.isVisible() == true ){
+            groupImage.setOpacity(0.5);
+            chatImage.setOpacity(1);
+            groupAnchorPane.setVisible(false);
+            chatAnchorPage.setVisible(true);
+        }else{
+            groupImage.setOpacity(1);
+            chatImage.setOpacity(0.5);
+            groupAnchorPane.setVisible(true);
+            chatAnchorPage.setVisible(false);
+        }
+
+    }
 }
