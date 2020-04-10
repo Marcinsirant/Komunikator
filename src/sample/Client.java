@@ -1,6 +1,10 @@
 package sample;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client
@@ -26,6 +30,8 @@ public class Client
 
 
             objectOutputStream=new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream=new ObjectInputStream(socket.getInputStream());
+
         }
         catch(UnknownHostException u)
         {
@@ -90,4 +96,15 @@ public class Client
         objectOutputStream.writeObject(sendStream);
     }
 
+    public ObservableList<String> getUsersInGroupFromServer(String groupName) throws IOException, ClassNotFoundException {
+        Stream sendStream = new Stream(3, new String(groupName));
+        objectOutputStream.writeObject(sendStream);
+
+        Stream readStream = (Stream)objectInputStream.readObject();
+
+        ArrayList<String> list = (ArrayList<String>)readStream.getStremObject();
+        ObservableList<String> listO =FXCollections.observableArrayList(list);
+        System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
+        return listO;
+    }
 }

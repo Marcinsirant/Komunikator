@@ -71,9 +71,9 @@
          <children>
             <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
                <children>
-                  <TableView fx:id="TableView" layoutX="10.0" layoutY="14.0" prefHeight="443.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
+                  <TableView fx:id="chatTableView" layoutX="10.0" layoutY="14.0" prefHeight="443.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
                     <columns>
-                      <TableColumn prefWidth="147.0" style="-fx-background-color: #5959ff;" text="Name" />
+                      <TableColumn fx:id="chatTableColumn" prefWidth="147.0" style="-fx-background-color: #5959ff;" text="Name" />
                     </columns>
                   </TableView>
                </children>

@@ -49,7 +49,17 @@ public class Server implements Serializable
                             break;
                         case 2:
                             addOrJoinGroup((String) ourStream.getStremObject().toString(), clientName, socket);
+                            break;
+                        case 3:
+                            int el = 0;
+                            for(Group e: groupList ){
+                                if(e.groupName.equals( (String) ourStream.getStremObject().toString() )){
+                                   el = groupList.indexOf(e);
+                                   System.out.println("wysylam: "+e.getGroupName());
+                                };
+                            }
 
+                            objectOutputStream.writeObject(new Stream(3, groupList.get(el).getArrayListWithNamesUsers()));
                             break;
                         //default:
                             // code block

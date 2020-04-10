@@ -47,7 +47,10 @@ public class Controller {
     private AnchorPane chatAnchorPage;
 
     @FXML
-    private TableView<?> TableView;
+    private TableView<String> chatTableView;
+
+    @FXML
+    private TableColumn<String, String> chatTableColumn;
 
     @FXML
     private ImageView sendButtonImageView;
@@ -74,9 +77,24 @@ public class Controller {
             TableRow<String> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    chatTableView.getItems().clear();
                     String rowData = row.getItem();
+
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
+                    chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
+                    try {
+                        chatTableView.setItems(client.getUsersInGroupFromServer(rowData));
+
+                    } catch (IOException|ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+
                 }
             });
             return row;
