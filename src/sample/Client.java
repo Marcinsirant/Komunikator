@@ -12,16 +12,20 @@ public class Client
     // initialize socket and input output streams 
     private Socket socket            = null;
     private DataInputStream  input   = null;
-
+    private String actualGroup; //aktualna grupa w czacie
+    private ClientMessageReceive t;
+    private Controller controller;
     private ObjectOutputStream objectOutputStream = null;
     public ObjectInputStream objectInputStream = null;
     // constructor to put ip address and port 
-    public Client(String address, int port)
+    public Client(String address, int port, Controller controller)
     {
         // establish a connection 
         try
         {
+            this.controller = controller;
             socket = new Socket(address, port);
+
             System.out.println("Connected");
 
             // takes input from terminal
@@ -29,8 +33,11 @@ public class Client
 
 
 
-            objectOutputStream=new ObjectOutputStream(socket.getOutputStream());
-            objectInputStream=new ObjectInputStream(socket.getInputStream());
+            objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream= new ObjectInputStream(socket.getInputStream());
+
+            t = new ClientMessageReceive(socket, objectInputStream);
+            t.start();
 
         }
         catch(UnknownHostException u)
@@ -86,6 +93,14 @@ public class Client
 //        }
     }
 
+    public String getActualGroup() {
+        return actualGroup;
+    }
+
+    public void setActualGroup(String actualGroup) {
+        this.actualGroup = actualGroup;
+    }
+
     public void userLogin(String name) throws IOException {
         Stream sendStream = new Stream(1, new String(name));
         objectOutputStream.writeObject(sendStream);
@@ -96,15 +111,71 @@ public class Client
         objectOutputStream.writeObject(sendStream);
     }
 
-    public ObservableList<String> getUsersInGroupFromServer(String groupName) throws IOException, ClassNotFoundException {
+    public void getUsersInGroupFromServer(String groupName) throws IOException {
         Stream sendStream = new Stream(3, new String(groupName));
         objectOutputStream.writeObject(sendStream);
+    }
 
-        Stream readStream = (Stream)objectInputStream.readObject();
-
+   public void setUsersInGroupFromServer(Stream readStream) {
         ArrayList<String> list = (ArrayList<String>)readStream.getStremObject();
-        ObservableList<String> listO =FXCollections.observableArrayList(list);
+        ObservableList<String> listO = FXCollections.observableArrayList(list);
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
-        return listO;
+        controller.getChatTableView().setItems(listO);
+    }
+
+    public void userSendMessage(Message newMessage) throws IOException {
+        Stream sendStream = new Stream(4, newMessage);
+        objectOutputStream.writeObject(sendStream);
+
+    }
+
+    public class ClientMessageReceive implements Runnable{
+        public Thread t;
+        private Socket socket;
+        private ObjectInputStream objectInputStream;
+
+        public ClientMessageReceive(Socket clientSocket, ObjectInputStream getInputStream) {
+            this.socket = clientSocket;
+            this.objectInputStream = getInputStream;
+        }
+
+        public void start(){
+            System.out.println("Wątek odbierania wiadomości");
+            if(t == null) {
+                t = new Thread(this);
+                t.start();
+            }
+        }
+
+        @Override
+        public void run() {
+            System.out.println("(run)");
+            while(true){
+                try {
+                    System.out.println("(odczyt...)");
+                    Stream ourStream = (Stream) objectInputStream.readObject();
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+                    switch(ourStream.getType()){
+                        case 3:
+                            System.out.println("Lista grup");
+                            setUsersInGroupFromServer(ourStream);
+                            break;
+                        case 5:
+                            Message receiveMessage = (Message) ourStream.getStremObject();
+                            System.out.println("Wiadomość");
+                            System.out.println(receiveMessage.getSource());
+                            System.out.println(receiveMessage.getDirection());
+                            System.out.println(receiveMessage.getMessageContent());
+                            controller.addMessageToTextArea(receiveMessage);
+                            break;
+                    }
+
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
     }
 }

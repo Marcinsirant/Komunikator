@@ -17,7 +17,7 @@ import java.util.Collection;
 
 public class Controller {
 
-    Client client = new Client("127.0.0.1", 5000);
+    Client client = new Client("127.0.0.1", 5000, this);
 
     @FXML
     private ImageView chatImage;
@@ -70,6 +70,13 @@ public class Controller {
     @FXML
     private Button loginButton;
 
+    public TableView<String> getChatTableView() {
+        return chatTableView;
+    }
+
+    public void setChatTableView(TableView<String> chatTableView) {
+        this.chatTableView = chatTableView;
+    }
 
     private void chooseGroup(){
 
@@ -79,21 +86,15 @@ public class Controller {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     chatTableView.getItems().clear();
                     String rowData = row.getItem();
-
+                    client.setActualGroup(rowData);
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
                     chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
                     try {
-                        chatTableView.setItems(client.getUsersInGroupFromServer(rowData));
-
-                    } catch (IOException|ClassNotFoundException e) {
+                        client.getUsersInGroupFromServer(rowData);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
-
-
-
 
                 }
             });
@@ -145,8 +146,13 @@ public class Controller {
     }
 
     @FXML
-    void sendButtonImageViewClick(MouseEvent event) {
-
+    void sendButtonImageViewClick(MouseEvent event) throws IOException, ClassNotFoundException {
+        Message newMessage = new Message(4, fieldToSendTextArea.getText());
+        System.out.println(client.getActualGroup());
+        newMessage.setDirection(client.getActualGroup());
+        newMessage.setSource(loginTextField.getText());
+        fieldToSendTextArea.setText("");
+        client.userSendMessage(newMessage);
     }
 
     void changeAnchorPage(){
@@ -162,5 +168,13 @@ public class Controller {
             chatAnchorPage.setVisible(false);
         }
 
+    }
+
+    public void addMessageToTextArea(Message message){
+        if(message.getSource().equals(loginTextField.getText())){
+            chatTextArea.setText(chatTextArea.getText() + "\n" + "                                                                                         " + message.getMessageContent());
+        }else {
+            chatTextArea.setText(chatTextArea.getText() + "\n" + message.getSource() + ": " + message.getMessageContent());
+        }
     }
 }
