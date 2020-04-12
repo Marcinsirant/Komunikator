@@ -70,6 +70,8 @@ public class Controller {
     @FXML
     private Button loginButton;
 
+    @FXML
+    private Label groupNameLabel;
 
     private void chooseGroup(){
 
@@ -85,15 +87,10 @@ public class Controller {
                     chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
                     try {
                         chatTableView.setItems(client.getUsersInGroupFromServer(rowData));
-
+                        groupNameLabel.setText(rowData);
                     } catch (IOException|ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-
-
-
-
-
 
                 }
             });
