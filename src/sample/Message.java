@@ -5,11 +5,20 @@ import java.io.Serializable;
 public class Message implements Serializable {
     int messageType;
     String messageContent;
+    String source;
     String direction;
 
     public Message(int type, String content){
         messageType = type;
         messageContent = content;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public int getMessageType() {

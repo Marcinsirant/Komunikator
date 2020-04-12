@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class Group implements Serializable {
     String groupName;
-    Map<String, Socket> nameClientMap = new HashMap<String, Socket>();
+    Map<String, ObjectOutputStream> nameClientMap = new HashMap<String, ObjectOutputStream>();
 
     public Group(String name){
         groupName=name;
@@ -23,18 +24,16 @@ public class Group implements Serializable {
         this.nameClientMap=name.getNameClientMap();
     }
 
-    public void testowwa(){}
-
     public String getGroupName() {
         return groupName;
     }
 
 
-    public void addClient(String nameClient, Socket socket){
+    public void addClient(String nameClient, ObjectOutputStream socket){
         nameClientMap.put(nameClient, socket);
     }
 
-    public Map<String, Socket> getNameClientMap() {
+    public Map<String, ObjectOutputStream> getNameClientMap() {
         return nameClientMap;
     }
 
