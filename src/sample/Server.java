@@ -24,7 +24,6 @@ public class Server implements Serializable
 
         private String clientName;
 
-
         public ClientService(Socket clientSocket) throws IOException  {
             socket = clientSocket;
 
@@ -66,6 +65,9 @@ public class Server implements Serializable
                         case 4:
                             receiveMessage((Message) ourStream.getStremObject());
                             break;
+                        case 6:
+                            exitUser((String) ourStream.getStremObject());
+                            break;
                         //default:
                             // code block
                     }
@@ -73,8 +75,8 @@ public class Server implements Serializable
                     System.out.println("ClientName: " + clientName);
 
                 } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                    System.out.println("watek sie zakonczyl)");
+                   // e.printStackTrace();
+                    System.out.println("watek sie zakonczyl");
                     break;
                 }
             }
@@ -111,6 +113,7 @@ public class Server implements Serializable
             if(el.getGroupName().equals(group)){
                 index = el;
                 el.addClient(nameUser,socket);
+                sendActualGroupUserList(el);
             };
         }
 
@@ -118,10 +121,10 @@ public class Server implements Serializable
             Group gr = new Group(group);
             gr.addClient(nameUser, socket);
             groupList.add(gr);
+            sendActualGroupUserList(gr);
         }
 
         groupList.forEach((o)->{ System.out.println("grupy: " + o.getGroupName() +" uzytkownicy w grupie: " + o.getNameClientMap() );});
-
 
     };
 
@@ -147,6 +150,26 @@ public class Server implements Serializable
             entry.getValue().writeObject(sendMessage);
         }
 
+    }
+
+    public void exitUser(String userName) throws IOException {
+        for(Group el : groupList){
+            el.getNameClientMap().keySet().removeIf(key -> key.equals(userName));
+            if(el.getNameClientMap().isEmpty()){
+                el = null;
+            }
+            sendActualGroupUserList(el);
+        }
+    }
+
+
+    public void sendActualGroupUserList(Group group) throws IOException{
+        Map<String, ObjectOutputStream> listSockets = group.getNameClientMap();
+
+        for(Map.Entry<String, ObjectOutputStream> entry : listSockets.entrySet()){
+            Stream sendMessage = new Stream(3, group.getArrayListWithNamesUsers());
+            entry.getValue().writeObject(sendMessage);
+        }
     }
 
     public static void main(String[] args) {

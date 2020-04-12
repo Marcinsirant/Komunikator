@@ -15,6 +15,7 @@ public class Client
     private String actualGroup; //aktualna grupa w czacie
     private ClientMessageReceive t;
     private Controller controller;
+    private String userName;
     private ObjectOutputStream objectOutputStream = null;
     public ObjectInputStream objectInputStream = null;
     // constructor to put ip address and port 
@@ -93,6 +94,10 @@ public class Client
 //        }
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public String getActualGroup() {
         return actualGroup;
     }
@@ -102,6 +107,7 @@ public class Client
     }
 
     public void userLogin(String name) throws IOException {
+        userName = name;
         Stream sendStream = new Stream(1, new String(name));
         objectOutputStream.writeObject(sendStream);
     }
@@ -113,6 +119,11 @@ public class Client
 
     public void getUsersInGroupFromServer(String groupName) throws IOException {
         Stream sendStream = new Stream(3, new String(groupName));
+        objectOutputStream.writeObject(sendStream);
+    }
+
+    public void sendExitUser() throws IOException {
+        Stream sendStream = new Stream(6, userName);
         objectOutputStream.writeObject(sendStream);
     }
 

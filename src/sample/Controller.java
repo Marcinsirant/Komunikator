@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -70,9 +71,12 @@ public class Controller {
     @FXML
     private Button loginButton;
 
-
     @FXML
     private Label groupNameLabel;
+
+    @FXML
+    private Button exitButton;
+
 
     public TableView<String> getChatTableView() {
         return chatTableView;
@@ -153,11 +157,11 @@ public class Controller {
     }
 
     @FXML
-    void sendButtonImageViewClick(MouseEvent event) throws IOException, ClassNotFoundException {
+    void sendButtonImageViewClick(MouseEvent event) throws IOException {
         Message newMessage = new Message(4, fieldToSendTextArea.getText());
         System.out.println(client.getActualGroup());
         newMessage.setDirection(client.getActualGroup());
-        newMessage.setSource(loginTextField.getText());
+        newMessage.setSource(client.getUserName());
         fieldToSendTextArea.setText("");
         client.userSendMessage(newMessage);
     }
@@ -178,10 +182,18 @@ public class Controller {
     }
 
     public void addMessageToTextArea(Message message){
-        if(message.getSource().equals(loginTextField.getText())){
+        if(message.getSource().equals(client.getUserName())){
             chatTextArea.setText(chatTextArea.getText() + "\n" + "                                                                                         " + message.getMessageContent());
         }else {
             chatTextArea.setText(chatTextArea.getText() + "\n" + message.getSource() + ": " + message.getMessageContent());
         }
+    }
+
+    public void ExitApplication() throws IOException {
+        System.out.println("Wyjscie");
+        client.sendExitUser();
+        chatTextArea.setText(chatTextArea.getText() + "\n" + "Użytkownik: " + client.getUserName() + " opuścił czat");
+        Platform.exit();
+        System.exit(0);
     }
 }
