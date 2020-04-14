@@ -7,10 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,6 +102,7 @@ public class Controller {
                     client.setActualGroup(rowData);
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
+                    openChatPage();
                     chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
                     try {
 
@@ -141,6 +146,7 @@ public class Controller {
 
     @FXML
     void loginButtonClick(ActionEvent event) {
+
         loginAnchorPane.setVisible(false);
         groupAnchorPane.setVisible(true);
         groupImage.setOpacity(1);
@@ -195,5 +201,26 @@ public class Controller {
         chatTextArea.setText(chatTextArea.getText() + "\n" + "Użytkownik: " + client.getUserName() + " opuścił czat");
         Platform.exit();
         System.exit(0);
+    }
+
+    public void openChatPage(){
+        // create new scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/fxml/chatPage.fxml"));
+        Parent root = null;
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ChatPageController setChatPageController = loader.getController();
+
+        //send to second scene information from viewClassKinderGarten (save in ArrayList)
+        setChatPageController.initController(client);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        stage.show();
+
+
     }
 }

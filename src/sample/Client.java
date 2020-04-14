@@ -15,6 +15,7 @@ public class Client
     private String actualGroup; //aktualna grupa w czacie
     private ClientMessageReceive t;
     private Controller controller;
+    private ChatPageController controllerChat;
     private String userName;
     private ObjectOutputStream objectOutputStream = null;
     public ObjectInputStream objectInputStream = null;
@@ -24,6 +25,7 @@ public class Client
         // establish a connection 
         try
         {
+
             this.controller = controller;
             socket = new Socket(address, port);
 
@@ -92,6 +94,10 @@ public class Client
 //        {
 //            System.out.println(i);
 //        }
+    }
+
+    public void setControllerChat(ChatPageController controllerChat) {
+        this.controllerChat = controllerChat;
     }
 
     public String getUserName() {
@@ -178,6 +184,8 @@ public class Client
                             System.out.println(receiveMessage.getDirection());
                             System.out.println(receiveMessage.getMessageContent());
                             controller.addMessageToTextArea(receiveMessage);
+                            controllerChat.addMessageToTextArea(receiveMessage);
+
                             break;
                     }
 

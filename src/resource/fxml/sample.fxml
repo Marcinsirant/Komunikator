@@ -67,7 +67,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="chatAnchorPage" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="784.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="chatAnchorPage" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="784.0" style="-fx-background-color: white;">
          <children>
             <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
                <children>
