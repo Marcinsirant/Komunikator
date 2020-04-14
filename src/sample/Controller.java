@@ -215,7 +215,7 @@ public class Controller {
         }
         chatPageController = loader.getController();
 
-        client.setControllerChat(chatPageController);
+        client.setControllerChat(chatPageController, nameGroup);
         chatPageController.initController(client, nameGroup, list);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

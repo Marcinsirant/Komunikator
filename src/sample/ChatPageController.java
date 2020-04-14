@@ -18,6 +18,7 @@ import java.io.IOException;
 
 public class ChatPageController {
     Client client;
+    String actualGroup;
     @FXML
     private ImageView chatImage;
 
@@ -112,6 +113,7 @@ public class ChatPageController {
     void initController(Client client, String name, ObservableList <String> listO){
         this.client = client;
         groupNameLabel.setText(name);
+        actualGroup=name;
         chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
 
         chatTableView.getItems().add("asdasd");
@@ -120,8 +122,8 @@ public class ChatPageController {
     @FXML
     void sendButtonImageViewClick(MouseEvent event) throws IOException {
         Message newMessage = new Message(4, fieldToSendTextArea.getText());
-        System.out.println(client.getActualGroup());
-        newMessage.setDirection(client.getActualGroup());
+        System.out.println(actualGroup);
+        newMessage.setDirection(actualGroup);
         newMessage.setSource(client.getUserName());
         fieldToSendTextArea.setText("");
         client.userSendMessage(newMessage);

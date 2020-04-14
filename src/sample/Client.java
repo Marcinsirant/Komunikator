@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Client
@@ -15,6 +17,7 @@ public class Client
     private String actualGroup; //aktualna grupa w czacie
     private ClientMessageReceive t;
     private Controller controller;
+    private Map<String, ChatPageController> controllechatMaps =  new HashMap<String, ChatPageController>();
     private ChatPageController controllerChat = null;
     private String userName;
     private ObjectOutputStream objectOutputStream = null;
@@ -96,8 +99,9 @@ public class Client
 //        }
     }
 
-    public void setControllerChat(ChatPageController controllerChat) {
+    public void setControllerChat(ChatPageController controllerChat, String nameGroup) {
         this.controllerChat = controllerChat;
+        this.controllechatMaps.put(nameGroup,controllerChat);
     }
 
     public String getUserName() {
@@ -189,7 +193,14 @@ public class Client
                             System.out.println(receiveMessage.getDirection());
                             System.out.println(receiveMessage.getMessageContent());
                             //controller.addMessageToTextArea(receiveMessage);
-                            controllerChat.addMessageToTextArea(receiveMessage);
+                            // trzeba zrobic mape kontrolerow z ich nawami
+                            for(Map.Entry<String, ChatPageController> entry : controllechatMaps.entrySet()){
+                                if(entry.getKey().equals(receiveMessage.getDirection())){
+                                    entry.getValue().addMessageToTextArea(receiveMessage);
+                                }
+
+                            }
+                            //controllerChat.addMessageToTextArea(receiveMessage);
 
                             break;
                     }
