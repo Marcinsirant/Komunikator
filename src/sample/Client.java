@@ -139,7 +139,9 @@ public class Client
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
 
         controller.getChatTableView().setItems(listO);
-
+        if(controllerChat!=null){
+            controllerChat.getChatTableView().setItems(listO); // actualize usernames in chatpage
+        }
 
     }
 
