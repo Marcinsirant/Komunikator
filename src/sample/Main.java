@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/fxml/sample.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("KomunikatorV1");
-        primaryStage.setScene(new Scene(root, 851, 469));
+        primaryStage.setScene(new Scene(root, 459, 469));
        // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }

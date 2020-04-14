@@ -15,7 +15,7 @@ public class Client
     private String actualGroup; //aktualna grupa w czacie
     private ClientMessageReceive t;
     private Controller controller;
-    private ChatPageController controllerChat;
+    private ChatPageController controllerChat = null;
     private String userName;
     private ObjectOutputStream objectOutputStream = null;
     public ObjectInputStream objectInputStream = null;
@@ -139,7 +139,8 @@ public class Client
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
 
         controller.getChatTableView().setItems(listO);
-       //controllerChat.getChatTableView().setItems(listO);
+
+
     }
 
     public void userSendMessage(Message newMessage) throws IOException {
@@ -185,7 +186,7 @@ public class Client
                             System.out.println(receiveMessage.getSource());
                             System.out.println(receiveMessage.getDirection());
                             System.out.println(receiveMessage.getMessageContent());
-                            controller.addMessageToTextArea(receiveMessage);
+                            //controller.addMessageToTextArea(receiveMessage);
                             controllerChat.addMessageToTextArea(receiveMessage);
 
                             break;

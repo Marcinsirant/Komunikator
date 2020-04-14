@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="851.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="459.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane prefHeight="469.0" prefWidth="67.0" style="-fx-background-color: #3F4041;">
          <children>
@@ -67,7 +66,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="chatAnchorPage" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="784.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="chatAnchorPage" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="392.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
                <children>
@@ -78,35 +77,28 @@
                   </TableView>
                </children>
             </Pane>
-            <ImageView fx:id="sendButtonImageView" layoutX="695.0" layoutY="380.0" onMouseClicked="#sendButtonImageViewClick" rotate="90.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
-               <image>
-                  <Image url="@../image/icons8-email-send-100.png" />
-               </image>
-            </ImageView>
-            <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="576.0" promptText="fdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvfdcbcvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv4vvvvvvvvvvv" text="Hello. how are you?&#10;&#10;" />
-            <TextArea fx:id="fieldToSendTextArea" layoutX="178.0" layoutY="405.0" prefHeight="50.0" prefWidth="530.0" />
             <Text layoutX="178.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group name:" />
             <Label fx:id="groupNameLabel" layoutX="253.0" layoutY="14.0" text="NAME" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="851.0" style="-fx-background-color: #59595C;">
+      <AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="459.0" style="-fx-background-color: #59595C;">
          <children>
-            <ImageView layoutX="376.0" layoutY="38.0">
+            <ImageView layoutX="178.0" layoutY="57.0">
                <image>
                   <Image url="@../image/icons8-telegram-app-100.png" />
                </image>
             </ImageView>
-            <Label layoutX="272.0" layoutY="160.0" prefHeight="39.0" prefWidth="143.0" text="Your Name:">
+            <Label layoutX="74.0" layoutY="179.0" prefHeight="39.0" prefWidth="143.0" text="Your Name:">
                <font>
                   <Font name="Times New Roman Bold" size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="loginTextField" layoutX="426.0" layoutY="166.0" opacity="0.5" prefHeight="25.0" prefWidth="158.0" promptText="Username">
+            <TextField fx:id="loginTextField" layoutX="228.0" layoutY="185.0" opacity="0.5" prefHeight="25.0" prefWidth="158.0" promptText="Username">
                <font>
                   <Font name="Times New Roman" size="15.0" />
                </font>
             </TextField>
-            <Button fx:id="loginButton" layoutX="351.0" layoutY="228.0" mnemonicParsing="false" onAction="#loginButtonClick" opacity="0.5" prefHeight="25.0" prefWidth="149.0" text="Go" />
+            <Button fx:id="loginButton" layoutX="153.0" layoutY="247.0" mnemonicParsing="false" onAction="#loginButtonClick" opacity="0.5" prefHeight="25.0" prefWidth="149.0" text="Go" />
          </children>
       </AnchorPane>
       <Button fx:id="exitButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#ExitApplication" text="X" textAlignment="RIGHT" AnchorPane.rightAnchor="2.0" />

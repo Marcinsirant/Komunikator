@@ -23,6 +23,7 @@ import java.util.Collection;
 public class Controller {
 
     Client client = new Client("127.0.0.1", 5000, this);
+    ChatPageController chatPageController;
 
     @FXML
     private ImageView chatImage;
@@ -86,23 +87,22 @@ public class Controller {
         return chatTableView;
     }
 
-    public void setChatTableView(TableView<String> chatTableView) {
-        this.chatTableView = chatTableView;
-    }
-
-
     private void chooseGroup(){
 
         groupTableView.setRowFactory( tv -> {
             TableRow<String> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+
                     chatTableView.getItems().clear();
                     String rowData = row.getItem();
+                    groupNameLabel.setText(rowData);
                     client.setActualGroup(rowData);
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
-                    openChatPage(rowData);
+
+
+
                     chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
                     try {
 
@@ -111,7 +111,8 @@ public class Controller {
 
                         e.printStackTrace();
                     }
-
+                    openChatPage(rowData, chatTableView.getItems());
+                    chatPageController.setChatTableView(chatTableView.getItems()); // send to chat page list with username
                 }
             });
             return row;
@@ -203,7 +204,7 @@ public class Controller {
         System.exit(0);
     }
 
-    public void openChatPage(String nameGroup){
+    public int openChatPage(String nameGroup, ObservableList<String> list){
         // create new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/fxml/chatPage.fxml"));
         Parent root = null;
@@ -212,15 +213,16 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ChatPageController setChatPageController = loader.getController();
+        chatPageController = loader.getController();
 
-        //send to second scene information from viewClassKinderGarten (save in ArrayList)
-        setChatPageController.initController(client, nameGroup);
+        client.setControllerChat(chatPageController);
+        chatPageController.initController(client, nameGroup, list);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-
         stage.show();
 
-
+        return 1;
     }
+
+
 }

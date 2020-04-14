@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -103,10 +104,17 @@ public class ChatPageController {
         return chatTableView;
     }
 
-    void initController(Client client, String name){
+    public void setChatTableView(ObservableList <String> chatTableV) {
+
+        chatTableView.setItems(chatTableV);
+    }
+
+    void initController(Client client, String name, ObservableList <String> listO){
         this.client = client;
         groupNameLabel.setText(name);
-        client.setControllerChat(this);
+        chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
+
+        chatTableView.getItems().add("asdasd");
 
     }
     @FXML
@@ -117,6 +125,7 @@ public class ChatPageController {
         newMessage.setSource(client.getUserName());
         fieldToSendTextArea.setText("");
         client.userSendMessage(newMessage);
+
     }
 
     public void addMessageToTextArea(Message message){
