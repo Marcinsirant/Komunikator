@@ -102,7 +102,7 @@ public class Controller {
                     client.setActualGroup(rowData);
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
-                    openChatPage();
+                    openChatPage(rowData);
                     chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
                     try {
 
@@ -203,7 +203,7 @@ public class Controller {
         System.exit(0);
     }
 
-    public void openChatPage(){
+    public void openChatPage(String nameGroup){
         // create new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/fxml/chatPage.fxml"));
         Parent root = null;
@@ -215,7 +215,7 @@ public class Controller {
         ChatPageController setChatPageController = loader.getController();
 
         //send to second scene information from viewClassKinderGarten (save in ArrayList)
-        setChatPageController.initController(client);
+        setChatPageController.initController(client, nameGroup);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
 

@@ -137,7 +137,9 @@ public class Client
         ArrayList<String> list = (ArrayList<String>)readStream.getStremObject();
         ObservableList<String> listO = FXCollections.observableArrayList(list);
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
+
         controller.getChatTableView().setItems(listO);
+       //controllerChat.getChatTableView().setItems(listO);
     }
 
     public void userSendMessage(Message newMessage) throws IOException {

@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,10 +45,10 @@ public class ChatPageController {
     private AnchorPane chatAnchorPage;
 
     @FXML
-    private TableView<?> chatTableView;
+    private TableView<String> chatTableView;
 
     @FXML
-    private TableColumn<?, ?> chatTableColumn;
+    private TableColumn<String, String> chatTableColumn;
 
     @FXML
     private ImageView sendButtonImageView;
@@ -97,9 +98,16 @@ public class ChatPageController {
     void loginButtonClick(ActionEvent event) {
 
     }
-    void initController( Client client){
+
+    public TableView<String> getChatTableView() {
+        return chatTableView;
+    }
+
+    void initController(Client client, String name){
         this.client = client;
+        groupNameLabel.setText(name);
         client.setControllerChat(this);
+
     }
     @FXML
     void sendButtonImageViewClick(MouseEvent event) throws IOException {
