@@ -1,19 +1,21 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
+import javax.swing.text.LabelView;
 import java.io.IOException;
 
 public class ChatPageController {
@@ -77,6 +79,19 @@ public class ChatPageController {
     private Button exitButton;
 
     @FXML
+    private TextFlow chatTextFlow;
+
+
+    @FXML
+    private AnchorPane anoch;
+
+
+    @FXML
+    private ScrollPane scr;
+
+
+
+    @FXML
     void ExitApplication(ActionEvent event) {
 
     }
@@ -101,6 +116,8 @@ public class ChatPageController {
 
     }
 
+
+
     public TableView<String> getChatTableView() {
         return chatTableView;
     }
@@ -111,6 +128,9 @@ public class ChatPageController {
     }
 
     void initController(Client client, String name, ObservableList <String> listO){
+        Text text = new Text("Now this is a text node");
+        chatTextFlow.getChildren().add(text);
+
         this.client = client;
         groupNameLabel.setText(name);
         actualGroup=name;
@@ -131,11 +151,36 @@ public class ChatPageController {
     }
 
     public void addMessageToTextArea(Message message){
-        if(message.getSource().equals(client.getUserName())){
-            chatTextArea.setText(chatTextArea.getText() + "\n" + "                                                                                         " + message.getMessageContent());
-        }else {
-            chatTextArea.setText(chatTextArea.getText() + "\n" + message.getSource() + ": " + message.getMessageContent());
-        }
+        //if(message.getSource().equals(client.getUserName())){
+
+
+            Platform.runLater(()->{
+                Text t1 = new Text();
+                t1.setStyle("-fx-fill: red;-fx-font-weight:bold; -fx-text-alignment: right;");
+                t1.setText("\n" + "YOU: " + message.getMessageContent());
+                chatTextFlow.getChildren().add(t1);
+
+
+                Label label = new Label("\n" + "YOU: " + message.getMessageContent());
+                label.setMinWidth(250);
+                anoch.getChildren().add(label);
+            });
+
+            chatTextArea.appendText("\n" + "YOU: " + message.getMessageContent());
+        //}else {
+
+            Platform.runLater(()->{
+                Text t1 = new Text();
+                t1.setStyle("-fx-fill: black;-fx-font-weight:bold; -fx-text-alignment: left;");
+                t1.setText("\n" + message.getSource() + ": " + message.getMessageContent());
+                chatTextFlow.getChildren().add(t1);
+            });
+
+            chatTextArea.appendText("\n" + message.getSource() + ": " + message.getMessageContent());
+
+        //}
+
+
     }
 
 }

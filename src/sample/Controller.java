@@ -199,7 +199,7 @@ public class Controller {
     public void ExitApplication() throws IOException {
         System.out.println("Wyjscie");
         client.sendExitUser();
-        chatTextArea.setText(chatTextArea.getText() + "\n" + "Użytkownik: " + client.getUserName() + " opuścił czat");
+       // chatTextArea.setText(chatTextArea.getText() + "\n" + "Użytkownik: " + client.getUserName() + " opuścił czat");
         Platform.exit();
         System.exit(0);
     }
@@ -207,6 +207,7 @@ public class Controller {
     public int openChatPage(String nameGroup, ObservableList<String> list){
         // create new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../resource/fxml/chatPage.fxml"));
+
         Parent root = null;
         try {
             root = (Parent) loader.load();
