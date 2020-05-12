@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -29,19 +30,19 @@
             <Image url="@../image/icons8-email-send-100.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="200.0" />
+      <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="96.0" />
       <TextArea fx:id="fieldToSendTextArea" layoutX="178.0" layoutY="405.0" prefHeight="50.0" prefWidth="530.0" />
       <Text layoutX="178.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group name:" />
       <Label fx:id="groupNameLabel" layoutX="253.0" layoutY="14.0" text="NAME" />
-      <ScrollPane layoutX="384.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane layoutX="287.0" layoutY="40.0" prefHeight="349.0" prefWidth="113.0">
          <content>
             <TextFlow fx:id="chatTextFlow" prefHeight="240.0" prefWidth="182.0" />
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="scr" layoutX="556.0" layoutY="205.0" prefHeight="200.0" prefWidth="200.0">
-        <content>
-          <AnchorPane fx:id="anoch" minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="88.0" />
-        </content>
+      <ScrollPane fx:id="scr" layoutX="415.0" layoutY="40.0" prefHeight="349.0" prefWidth="338.0">
+         <content>
+            <VBox fx:id="vb" />
+         </content>
       </ScrollPane>
    </children>
    <stylesheets>

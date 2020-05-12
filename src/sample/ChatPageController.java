@@ -5,18 +5,22 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import javax.swing.text.LabelView;
 import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ChatPageController {
     Client client;
@@ -89,7 +93,8 @@ public class ChatPageController {
     @FXML
     private ScrollPane scr;
 
-
+    @FXML
+    private VBox vb;
 
     @FXML
     void ExitApplication(ActionEvent event) {
@@ -155,17 +160,27 @@ public class ChatPageController {
 
 
             Platform.runLater(()->{
+                //center
                 Text t1 = new Text();
                 t1.setStyle("-fx-fill: red;-fx-font-weight:bold; -fx-text-alignment: right;");
                 t1.setText("\n" + "YOU: " + message.getMessageContent());
                 chatTextFlow.getChildren().add(t1);
 
-
+                //right
                 Label label = new Label("\n" + "YOU: " + message.getMessageContent());
-                label.setMinWidth(250);
-                anoch.getChildren().add(label);
+                label.setPrefWidth(320);
+                label.setWrapText(true);
+                label.setAlignment(Pos.CENTER_RIGHT);
+                label.setStyle("-fx-text-fill: red;");
+                //label.setStyle("-fx-fill: red ; -fx-background-radius: 10;");
+
+                vb.getChildren().add(label);
+
+
             });
 
+
+            //left
             chatTextArea.appendText("\n" + "YOU: " + message.getMessageContent());
         //}else {
 
@@ -174,13 +189,22 @@ public class ChatPageController {
                 t1.setStyle("-fx-fill: black;-fx-font-weight:bold; -fx-text-alignment: left;");
                 t1.setText("\n" + message.getSource() + ": " + message.getMessageContent());
                 chatTextFlow.getChildren().add(t1);
+
+                Label label = new Label("\n" + message.getSource() + ": "+"\n" + message.getMessageContent());
+
+                label.setPrefWidth(320);
+                label.setWrapText(true);
+                label.setAlignment(Pos.CENTER_LEFT);
+                //label.setStyle("-fx-background-color: #325A9B; -fx-background-radius: 10;");
+
+                vb.getChildren().add(label);
             });
 
             chatTextArea.appendText("\n" + message.getSource() + ": " + message.getMessageContent());
 
         //}
-
-
+        // scroll bottom
+        scr.vvalueProperty().bind(vb.heightProperty());
     }
 
 }
