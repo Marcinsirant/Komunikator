@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -96,6 +97,7 @@ public class ChatPageController {
     @FXML
     private VBox vb;
 
+
     @FXML
     void ExitApplication(ActionEvent event) {
 
@@ -133,8 +135,6 @@ public class ChatPageController {
     }
 
     void initController(Client client, String name, ObservableList <String> listO){
-        Text text = new Text("Now this is a text node");
-        chatTextFlow.getChildren().add(text);
 
         this.client = client;
         groupNameLabel.setText(name);
@@ -158,51 +158,49 @@ public class ChatPageController {
     public void addMessageToTextArea(Message message){
         //if(message.getSource().equals(client.getUserName())){
 
-
+            // if we dont use plaform.runLater, program isnt working
             Platform.runLater(()->{
-                //center
-                Text t1 = new Text();
-                t1.setStyle("-fx-fill: red;-fx-font-weight:bold; -fx-text-alignment: right;");
-                t1.setText("\n" + "YOU: " + message.getMessageContent());
-                chatTextFlow.getChildren().add(t1);
-
-                //right
-                Label label = new Label("\n" + "YOU: " + message.getMessageContent());
-                label.setPrefWidth(320);
+                Label label = new Label( "YOU: " + message.getMessageContent());
+                label.setMaxWidth(360);
                 label.setWrapText(true);
                 label.setAlignment(Pos.CENTER_RIGHT);
-                label.setStyle("-fx-text-fill: red;");
-                //label.setStyle("-fx-fill: red ; -fx-background-radius: 10;");
-
-                vb.getChildren().add(label);
+                label.setStyle("-fx-padding : 1em; -fx-text-fill: black; -fx-background-radius: 10; -fx-background-color:  #E0E0E0;");
 
 
+                HBox hBox=new HBox();
+                hBox.setPrefWidth(550);
+                hBox.setMaxWidth(550);
+                hBox.getChildren().add(label);
+                hBox.setAlignment(Pos.BASELINE_RIGHT);
+
+                vb.setAlignment(Pos.CENTER);
+                vb.getChildren().add(hBox);
             });
 
-
-            //left
-            chatTextArea.appendText("\n" + "YOU: " + message.getMessageContent());
         //}else {
 
             Platform.runLater(()->{
-                Text t1 = new Text();
-                t1.setStyle("-fx-fill: black;-fx-font-weight:bold; -fx-text-alignment: left;");
-                t1.setText("\n" + message.getSource() + ": " + message.getMessageContent());
-                chatTextFlow.getChildren().add(t1);
 
-                Label label = new Label("\n" + message.getSource() + ": "+"\n" + message.getMessageContent());
-
-                label.setPrefWidth(320);
+                Label label = new Label(  message.getSource() + ": "+"\n" + message.getMessageContent());
+                label.setMaxWidth(360);
                 label.setWrapText(true);
                 label.setAlignment(Pos.CENTER_LEFT);
-                //label.setStyle("-fx-background-color: #325A9B; -fx-background-radius: 10;");
+                label.setStyle("-fx-padding : 1em;-fx-text-fill: white; -fx-background-radius: 10; -fx-background-color:  #5999F1;");
 
-                vb.getChildren().add(label);
+                HBox hBox=new HBox();
+                hBox.setStyle("-fx-padding : 1em;");
+                hBox.setPrefWidth(550);
+                hBox.setMaxWidth(550);
+                hBox.getChildren().add(label);
+                hBox.setAlignment(Pos.BASELINE_LEFT);
+
+                vb.setAlignment(Pos.CENTER);
+                vb.getChildren().add(hBox);
+
             });
 
-            chatTextArea.appendText("\n" + message.getSource() + ": " + message.getMessageContent());
-
         //}
+
         // scroll bottom
         scr.vvalueProperty().bind(vb.heightProperty());
     }

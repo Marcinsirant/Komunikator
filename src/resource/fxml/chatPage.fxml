@@ -12,16 +12,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane fx:id="chatAnchorPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChatPageController">
    <children>
       <Pane prefHeight="469.0" prefWidth="169.0" style="-fx-background-color: #59595C;">
          <children>
-            <TableView fx:id="chatTableView" layoutX="10.0" layoutY="14.0" prefHeight="443.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
+            <TableView fx:id="chatTableView" layoutX="10.0" layoutY="14.0" maxWidth="149.0" prefHeight="443.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-table-cell-border-color: transparent; -fx-border-color: white;">
                <columns>
-                  <TableColumn fx:id="chatTableColumn" prefWidth="147.0" style="-fx-background-color: #5959ff;" text="Name" />
+                  <TableColumn fx:id="chatTableColumn" maxWidth="149.0" prefWidth="149.0" style="-fx-background-color: #59595C; -fx-text-fill: white;" text="Name" />
                </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </Pane>
@@ -30,18 +32,12 @@
             <Image url="@../image/icons8-email-send-100.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="chatTextArea" editable="false" layoutX="178.0" layoutY="40.0" prefHeight="349.0" prefWidth="96.0" />
-      <TextArea fx:id="fieldToSendTextArea" layoutX="178.0" layoutY="405.0" prefHeight="50.0" prefWidth="530.0" />
+      <TextArea fx:id="fieldToSendTextArea" layoutX="180.0" layoutY="405.0" prefHeight="50.0" prefWidth="530.0" wrapText="true" />
       <Text layoutX="178.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group name:" />
       <Label fx:id="groupNameLabel" layoutX="253.0" layoutY="14.0" text="NAME" />
-      <ScrollPane layoutX="287.0" layoutY="40.0" prefHeight="349.0" prefWidth="113.0">
+      <ScrollPane fx:id="scr" layoutX="180.0" layoutY="40.0" prefHeight="349.0" prefWidth="573.0" style="-fx-background-color: white; -fx-border-color: white;">
          <content>
-            <TextFlow fx:id="chatTextFlow" prefHeight="240.0" prefWidth="182.0" />
-         </content>
-      </ScrollPane>
-      <ScrollPane fx:id="scr" layoutX="415.0" layoutY="40.0" prefHeight="349.0" prefWidth="338.0">
-         <content>
-            <VBox fx:id="vb" />
+            <VBox fx:id="vb" maxWidth="560.0" />
          </content>
       </ScrollPane>
    </children>

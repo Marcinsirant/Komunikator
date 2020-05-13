@@ -1,3 +1,32 @@
 #chatTextArea {
     -fx-font-size: 13pt;
 }
+
+.text-area {
+
+    -fx-padding: 0.5em;
+
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+
+    /* top-left, top-right, bottom-right, and bottom-left corners, in that
+    order. */
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
+}
+
+#fieldToSendTextArea .scroll-pane {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
