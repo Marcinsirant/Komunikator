@@ -14,9 +14,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -147,7 +152,6 @@ public class Controller {
 
     @FXML
     void loginButtonClick(ActionEvent event) {
-
         loginAnchorPane.setVisible(false);
         groupAnchorPane.setVisible(true);
         groupImage.setOpacity(1);

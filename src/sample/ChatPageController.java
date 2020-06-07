@@ -156,7 +156,7 @@ public class ChatPageController {
     }
 
     public void addMessageToTextArea(Message message){
-        //if(message.getSource().equals(client.getUserName())){
+        if(message.getSource().equals(client.getUserName())){
 
             // if we dont use plaform.runLater, program isnt working
             Platform.runLater(()->{
@@ -177,10 +177,10 @@ public class ChatPageController {
                 vb.getChildren().add(hBox);
             });
 
-        //}else {
+        }else {
 
             Platform.runLater(()->{
-
+                SoundManager.soundReceived();
                 Label label = new Label(  message.getSource() + ": "+"\n" + message.getMessageContent());
                 label.setMaxWidth(360);
                 label.setWrapText(true);
@@ -199,7 +199,7 @@ public class ChatPageController {
 
             });
 
-        //}
+        }
 
         // scroll bottom
         scr.vvalueProperty().bind(vb.heightProperty());
