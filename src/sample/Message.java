@@ -44,4 +44,13 @@ public class Message implements Serializable {
     public void setDirection(String direction) {
         this.direction = direction;
     }
+
+    public void encryptMessage(String secretKey){
+        messageContent = AES.encrypt(messageContent, secretKey);
+    }
+
+    public void decryptMessage(String secretKey){
+        messageContent = AES.decrypt(messageContent, secretKey);
+    }
+
 }

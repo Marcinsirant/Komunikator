@@ -106,9 +106,7 @@ public class Controller {
                     System.out.println("click group: "+rowData);
                     changeAnchorPage();
 
-
-
-                    chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
+                    chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(AES.decrypt(data.getValue(), groupNameLabel.getText())));
                     try {
 
                         client.getUsersInGroupFromServer(rowData);
@@ -192,13 +190,6 @@ public class Controller {
 
     }
 
-    public void addMessageToTextArea(Message message){
-        if(message.getSource().equals(client.getUserName())){
-            chatTextArea.setText(chatTextArea.getText() + "\n" + "                                                                                         " + message.getMessageContent());
-        }else {
-            chatTextArea.setText(chatTextArea.getText() + "\n" + message.getSource() + ": " + message.getMessageContent());
-        }
-    }
 
     public void ExitApplication() throws IOException {
         if(client.getUserName() != null){

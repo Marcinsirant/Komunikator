@@ -49,7 +49,7 @@ public class Group implements Serializable {
      ArrayList<String> getArrayListWithNamesUsers(){
          ArrayList<String> list = new ArrayList<String>();
          nameClientMap.forEach((string,socket)->{
-             list.add(string);
+             list.add(AES.encrypt(string, groupName));
          });
          System.out.println("list size = "+list.size());
          return list;

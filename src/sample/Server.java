@@ -4,7 +4,6 @@ package sample;// A Java program for a Server
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,19 +42,19 @@ public class Server implements Serializable
                     System.out.println("(odczyt...)");
 
                     Stream ourStream = (Stream) objectInputStream.readObject();
-                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStreamObject().getClass());
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
 
                     switch(ourStream.getType()) {
                         case 1:
-                            clientName = (String) ourStream.getStreamObject().toString();
+                            clientName = AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString());
                             break;
                         case 2:
-                            addOrJoinGroup((String) ourStream.getStreamObject().toString(), clientName, objectOutputStream);
+                            addOrJoinGroup(AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()), clientName, objectOutputStream);
                             break;
                         case 3:
                             int el = 0;
                             for(Group e: groupList ){
-                                if(e.groupName.equals( (String) ourStream.getStreamObject().toString() )){
+                                if(e.groupName.equals( AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()) )){
                                    el = groupList.indexOf(e);
                                    System.out.println("wysylam: "+e.getGroupName());
                                 };
@@ -64,10 +63,10 @@ public class Server implements Serializable
 
                             break;
                         case 4:
-                            receiveMessage((Message) ourStream.getStreamObject());
+                            receiveMessage((Message) ourStream.getStremObject());
                             break;
                         case 6:
-                            exitUser((String) ourStream.getStreamObject());
+                            exitUser(AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()));
                             break;
                         //default:
                             // code block
@@ -75,7 +74,7 @@ public class Server implements Serializable
 
                     System.out.println("ClientName: " + clientName);
 
-                } catch (NullPointerException | IOException | ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                    // e.printStackTrace();
                     System.out.println("watek sie zakonczyl");
                     break;

@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Client
 {
@@ -54,48 +55,6 @@ public class Client
             System.out.println(i);
         }
 
-        // string to read message from input 
-      //  String line = "";
-
-        // keep reading until "Over" is input 
-//        while (!line.equals("Over"))
-//        {
-//            try
-//            {
-//                Scanner scanner = new Scanner(System.in);
-//                int num = scanner.nextInt();
-//                line = input.readLine();
-//
-//                Stream sendStream = new Stream(num,new String(line));
-//
-//                objectOutputStream.writeObject(sendStream);
-//                System.out.println("wysylano: " + sendStream.getType() +":"+ sendStream.getStremObject().getClass());
-//
-//                if(num == 2){
-//                    //objectInputStream = new ObjectInputStream(socket.getInputStream());
-//                   //Stream ourStream = (Stream) objectInputStream.readObject();
-//                    // System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
-//                }
-//
-//
-//            }
-//            catch(IOException i)
-//            {
-//                System.out.println(i);
-//            }
-//        }
-
-        // close the connection 
-//        try
-//        {
-//            objectOutputStream.close();
-//            input.close();
-//            socket.close();
-//        }
-//        catch(IOException i)
-//        {
-//            System.out.println(i);
-//        }
     }
 
     public void setControllerChat(ChatPageController controllerChat, String nameGroup) {
@@ -117,28 +76,27 @@ public class Client
 
     public void userLogin(String name) throws IOException {
         userName = name;
-        Stream sendStream = new Stream(1, new String(name));
+        Stream sendStream = new Stream(1, AES.encrypt(name, socket.getInetAddress().toString()));
         objectOutputStream.writeObject(sendStream);
     }
 
     public void userCreateOrAddGroup(String groupName) throws IOException {
-        Stream sendStream = new Stream(2, new String(groupName));
+        Stream sendStream = new Stream(2, AES.encrypt(groupName, socket.getInetAddress().toString()));
         objectOutputStream.writeObject(sendStream);
     }
 
     public void getUsersInGroupFromServer(String groupName) throws IOException {
-        Stream sendStream = new Stream(3, new String(groupName));
+        Stream sendStream = new Stream(3, AES.encrypt(groupName, socket.getInetAddress().toString()));
         objectOutputStream.writeObject(sendStream);
     }
 
     public void sendExitUser() throws IOException {
-        Stream sendStream = new Stream(6, userName);
+        Stream sendStream = new Stream(6, AES.encrypt(userName, socket.getInetAddress().toString()));
         objectOutputStream.writeObject(sendStream);
     }
 
-
    public void setUsersInGroupFromServer(Stream readStream) {
-        ArrayList<String> list = (ArrayList<String>)readStream.getStreamObject();
+        ArrayList<String> list = (ArrayList<String>)readStream.getStremObject();
         ObservableList<String> listO = FXCollections.observableArrayList(list);
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
 
@@ -180,14 +138,15 @@ public class Client
                 try {
                     System.out.println("(odczyt...)");
                     Stream ourStream = (Stream) objectInputStream.readObject();
-                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStreamObject().getClass());
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
                     switch(ourStream.getType()){
                         case 3:
                             System.out.println("Lista grup");
                             setUsersInGroupFromServer(ourStream);
                             break;
                         case 5:
-                            Message receiveMessage = (Message) ourStream.getStreamObject();
+                            //receive message
+                            Message receiveMessage = (Message) ourStream.getStremObject();
                             System.out.println("Wiadomość");
                             System.out.println(receiveMessage.getSource());
                             System.out.println(receiveMessage.getDirection());

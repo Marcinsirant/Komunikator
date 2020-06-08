@@ -18,8 +18,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.text.LabelView;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -139,7 +141,7 @@ public class ChatPageController {
         this.client = client;
         groupNameLabel.setText(name);
         actualGroup=name;
-        chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue()));
+        chatTableColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(AES.decrypt(data.getValue(), actualGroup)));
 
         chatTableView.getItems().add("asdasd");
 
@@ -147,6 +149,9 @@ public class ChatPageController {
     @FXML
     void sendButtonImageViewClick(MouseEvent event) throws IOException {
         Message newMessage = new Message(4, fieldToSendTextArea.getText());
+        ///encrypt Message
+        newMessage.encryptMessage(actualGroup);
+        System.out.println("encrypt message: " + newMessage.getMessageContent());
         System.out.println(actualGroup);
         newMessage.setDirection(actualGroup);
         newMessage.setSource(client.getUserName());
@@ -156,8 +161,9 @@ public class ChatPageController {
     }
 
     public void addMessageToTextArea(Message message){
-        //if(message.getSource().equals(client.getUserName())){
-
+        //decrypt Message
+        message.decryptMessage(actualGroup);
+        if(message.getSource().equals(client.getUserName())){
             // if we dont use plaform.runLater, program isnt working
             Platform.runLater(()->{
                 Label label = new Label( "YOU: " + message.getMessageContent());
@@ -177,8 +183,7 @@ public class ChatPageController {
                 vb.getChildren().add(hBox);
             });
 
-        //}else {
-
+        }else {
             Platform.runLater(()->{
                 SoundManager.soundReceived();
                 Label label = new Label(  message.getSource() + ": "+"\n" + message.getMessageContent());
@@ -199,7 +204,7 @@ public class ChatPageController {
 
             });
 
-       // }
+        }
 
         // scroll bottom
         scr.vvalueProperty().bind(vb.heightProperty());
