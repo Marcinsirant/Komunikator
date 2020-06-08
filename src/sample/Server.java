@@ -4,6 +4,7 @@ package sample;// A Java program for a Server
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,19 +43,19 @@ public class Server implements Serializable
                     System.out.println("(odczyt...)");
 
                     Stream ourStream = (Stream) objectInputStream.readObject();
-                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStreamObject().getClass());
 
                     switch(ourStream.getType()) {
                         case 1:
-                            clientName = (String) ourStream.getStremObject().toString();
+                            clientName = (String) ourStream.getStreamObject().toString();
                             break;
                         case 2:
-                            addOrJoinGroup((String) ourStream.getStremObject().toString(), clientName, objectOutputStream);
+                            addOrJoinGroup((String) ourStream.getStreamObject().toString(), clientName, objectOutputStream);
                             break;
                         case 3:
                             int el = 0;
                             for(Group e: groupList ){
-                                if(e.groupName.equals( (String) ourStream.getStremObject().toString() )){
+                                if(e.groupName.equals( (String) ourStream.getStreamObject().toString() )){
                                    el = groupList.indexOf(e);
                                    System.out.println("wysylam: "+e.getGroupName());
                                 };
@@ -63,10 +64,10 @@ public class Server implements Serializable
 
                             break;
                         case 4:
-                            receiveMessage((Message) ourStream.getStremObject());
+                            receiveMessage((Message) ourStream.getStreamObject());
                             break;
                         case 6:
-                            exitUser((String) ourStream.getStremObject());
+                            exitUser((String) ourStream.getStreamObject());
                             break;
                         //default:
                             // code block
@@ -74,7 +75,7 @@ public class Server implements Serializable
 
                     System.out.println("ClientName: " + clientName);
 
-                } catch (IOException | ClassNotFoundException e) {
+                } catch (NullPointerException | IOException | ClassNotFoundException e) {
                    // e.printStackTrace();
                     System.out.println("watek sie zakonczyl");
                     break;

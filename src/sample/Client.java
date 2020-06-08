@@ -7,7 +7,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Client
 {
@@ -137,8 +136,9 @@ public class Client
         objectOutputStream.writeObject(sendStream);
     }
 
+
    public void setUsersInGroupFromServer(Stream readStream) {
-        ArrayList<String> list = (ArrayList<String>)readStream.getStremObject();
+        ArrayList<String> list = (ArrayList<String>)readStream.getStreamObject();
         ObservableList<String> listO = FXCollections.observableArrayList(list);
         System.out.println("jestem tutaj: " + readStream.getType() +" ilosc osob: "+listO.size());
 
@@ -180,14 +180,14 @@ public class Client
                 try {
                     System.out.println("(odczyt...)");
                     Stream ourStream = (Stream) objectInputStream.readObject();
-                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStreamObject().getClass());
                     switch(ourStream.getType()){
                         case 3:
                             System.out.println("Lista grup");
                             setUsersInGroupFromServer(ourStream);
                             break;
                         case 5:
-                            Message receiveMessage = (Message) ourStream.getStremObject();
+                            Message receiveMessage = (Message) ourStream.getStreamObject();
                             System.out.println("Wiadomość");
                             System.out.println(receiveMessage.getSource());
                             System.out.println(receiveMessage.getDirection());

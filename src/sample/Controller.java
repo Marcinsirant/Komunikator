@@ -201,9 +201,10 @@ public class Controller {
     }
 
     public void ExitApplication() throws IOException {
-        System.out.println("Wyjscie");
-        client.sendExitUser();
-       // chatTextArea.setText(chatTextArea.getText() + "\n" + "Użytkownik: " + client.getUserName() + " opuścił czat");
+        if(client.getUserName() != null){
+            client.sendExitUser();
+        }
+
         Platform.exit();
         System.exit(0);
     }

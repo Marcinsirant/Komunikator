@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class Stream implements Serializable {
     private int type;
-    private Object stremObject;
+    private Object streamObject;
 
     public Stream(int type, Object obj){
         this.type = type;
-        stremObject = obj;
+        streamObject = obj;
     }
 
     public int getType() {
         return type;
     }
 
-    public Object getStremObject() {
-        return stremObject;
+    public Object getStreamObject() {
+        return streamObject;
     }
 
-    public void setStremObject(Object stremObject) {
-        this.stremObject = stremObject;
+    public void setStreamObject(Object streamObject) {
+        this.streamObject = streamObject;
     }
 
     public void setType(int type) {

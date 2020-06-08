@@ -102,7 +102,6 @@
             <Button fx:id="loginButton" layoutX="153.0" layoutY="247.0" mnemonicParsing="false" onAction="#loginButtonClick" opacity="0.5" prefHeight="25.0" prefWidth="149.0" text="Go" />
          </children>
       </AnchorPane>
-      <Button fx:id="exitButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#ExitApplication" text="X" textAlignment="RIGHT" AnchorPane.rightAnchor="2.0" />
    </children>
    <stylesheets>
       <URL value="@sampleCSS.css" />
