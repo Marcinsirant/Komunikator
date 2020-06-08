@@ -42,19 +42,19 @@ public class Server implements Serializable
                     System.out.println("(odczyt...)");
 
                     Stream ourStream = (Stream) objectInputStream.readObject();
-                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStremObject().getClass());
+                    System.out.println("num: " + ourStream.getType() +" objType:"+ ourStream.getStreamObject().getClass());
 
                     switch(ourStream.getType()) {
                         case 1:
-                            clientName = AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString());
+                            clientName = AES.decrypt(ourStream.getStreamObject().toString(), socket.getInetAddress().toString());
                             break;
                         case 2:
-                            addOrJoinGroup(AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()), clientName, objectOutputStream);
+                            addOrJoinGroup(AES.decrypt(ourStream.getStreamObject().toString(), socket.getInetAddress().toString()), clientName, objectOutputStream);
                             break;
                         case 3:
                             int el = 0;
                             for(Group e: groupList ){
-                                if(e.groupName.equals( AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()) )){
+                                if(e.groupName.equals( AES.decrypt(ourStream.getStreamObject().toString(), socket.getInetAddress().toString()) )){
                                    el = groupList.indexOf(e);
                                    System.out.println("wysylam: "+e.getGroupName());
                                 };
@@ -63,10 +63,10 @@ public class Server implements Serializable
 
                             break;
                         case 4:
-                            receiveMessage((Message) ourStream.getStremObject());
+                            receiveMessage((Message) ourStream.getStreamObject());
                             break;
                         case 6:
-                            exitUser(AES.decrypt(ourStream.getStremObject().toString(), socket.getInetAddress().toString()));
+                            exitUser(AES.decrypt(ourStream.getStreamObject().toString(), socket.getInetAddress().toString()));
                             break;
                         //default:
                             // code block

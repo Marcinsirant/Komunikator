@@ -6,12 +6,12 @@ import java.io.File;
 
 public class SoundManager {
 
-    static String bip = "src/resource/sounds/swiftly.mp3";  //sound file path
+    static String bip = "out/production/Komunikator/resource/sounds/swiftly.mp3";  //sound file path
     static AudioClip audioClip;
 
     //Media pick = new Media(new File(bip).toURI().toString());
     public static void soundReceived(){
-        audioClip = new AudioClip(new File(bip).toURI().toString());
+        audioClip = new AudioClip(String.valueOf(SoundManager.class.getResource("../resource/sounds/swiftly.mp3")));
         audioClip.play();
     }
 
